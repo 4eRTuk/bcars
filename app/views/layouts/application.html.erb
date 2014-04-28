@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bcars</title>
+  <title><%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
+  <%= render 'layouts/shim' %>
+  <%= favicon_link_tag 'favicon.ico' %>
 </head>
 <body>
-
+<div class="container">
+<%= render 'layouts/header' %>
+<div class="sidebar content"><%= @left %></div>
 <%= yield %>
-
+<div class="sidebar content"><%= @right %></div>
+</div>
 </body>
 </html>

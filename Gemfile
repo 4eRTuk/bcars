@@ -9,6 +9,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem "activerecord-oracle_enhanced-adapter", "~> 1.5.0"
+gem 'ruby-oci8', '~> 2.1.5'
 
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

@@ -1,0 +1,27 @@
+<% @left = get_top %>
+<% @right = File.read("public/info.txt") %>
+<table class="man-models content">
+<tr class="manufacturer">
+  <td>
+    <%= image_tag("Dodge_logo.png", :border => 0, alt:"Dodge") %>
+  </td>
+  <td>
+    <%= image_tag("Chrysler_logo.png", :border => 0, alt:"Chrysler") %>
+  </td>
+  <td>
+    <%= image_tag("Jeep_logo.png", :border => 0, alt:"Chrysler") %>
+  </td>
+</tr>
+
+<tr>
+<td>
+  <%= render 'models/model', man_id: 3 %>
+</td>
+<td>
+  <%= render 'models/model', man_id: 2 %>
+</td>
+<td>
+  <%= render 'models/model', man_id: 1 %>
+</td>
+</tr>
+</table>
