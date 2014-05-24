@@ -1,0 +1,20 @@
+<% provide(:title, 'Все клиенты') %>
+<% @left = render 'layouts/admin' %>
+<div class="content">
+<%= form_tag people_path, :method => 'get' do %>
+
+<table class="list">
+	<tr>
+		<th><%= text_field_tag :id, params[:id], placeholder: 'По ИД' %></th>
+		<th><%= text_field_tag :email, params[:email], placeholder: 'По email' %></th>
+		<th><%= text_field_tag :lastname, params[:lastname], placeholder: 'По Фамилии' %></th>
+		<th><%= text_field_tag :firstname, params[:firstname], placeholder: 'По имени' %></th>
+		<th><%= text_field_tag :middlename, params[:middlename], placeholder: 'По отчеству' %></th>
+		<th><%= text_field_tag :phone, params[:phone], placeholder: 'По телефону' %></th>
+	</tr>
+</table>
+<%= submit_tag "Фильтр", :name => nil, class: "red-btn" %>
+
+<div id="people"><%= render 'people' %></div>
+<% end %>
+</div>

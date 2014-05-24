@@ -1,0 +1,14 @@
+<%= form_for(:session, url: sessions_path) do |f| %>
+
+	<%= f.label :email, "Адрес email:" %>
+	<%= f.text_field :email %><br>
+	
+	<%= f.label :password, "Пароль:" %>
+	<%= f.password_field :password %>
+	
+	<%= f.submit "Войти", class:"c-link red-btn" %>
+<% end %>
+
+	<%= form_tag(new_person_path, method: "get") do %>
+		<%= button_tag "Регистрация", class:"с-link gray-btn" %>
+	<% end %>

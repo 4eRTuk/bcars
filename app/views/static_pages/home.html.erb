@@ -1,6 +1,6 @@
-<% @left = get_top %>
-<% @right = File.read("public/info.txt") %>
-<table class="man-models content">
+<% @left = render 'layouts/top' %>
+<% @right = render 'static_pages/home_r' %>
+<div class="content"><table>
 <tr class="manufacturer">
   <td>
     <%= image_tag("Dodge_logo.png", :border => 0, alt:"Dodge") %>
@@ -24,4 +24,4 @@
   <%= render 'models/model', man_id: 1 %>
 </td>
 </tr>
-</table>
+</table></div>

@@ -1,0 +1,17 @@
+<% provide(:title, 'Все модели') %>
+<% @left = render 'layouts/admin' %>
+<% @right = render 'admin_r' %>
+<div class="content">
+<%= form_tag models_path, :method => 'get' do %>
+
+<table class="list">
+	<tr>
+		<th><%= select_tag :manufacturer_id, options_for_select(@mans, params[:manufacturer_id]), prompt: "Все" %></th>
+		<th><%= text_field_tag :name, params[:name], placeholder: 'По модели' %></th>
+	</tr>
+</table>
+<%= submit_tag "Фильтр", :name => nil, class: "red-btn" %>
+
+<div id="models"><%= render 'models' %></div>
+<% end %>
+</div>

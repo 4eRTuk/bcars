@@ -1,0 +1,16 @@
+<% @model.specifications.each do |spec| %>
+	<li>
+		<%= spec.name %> 
+		<%= link_to "Подробнее", "#spec_id_#{spec.id}", rel: "facebox" %>
+		<% if admin? %>
+			<%= link_to "ред.", edit_specification_path(spec) %>
+		<% end %>
+		<div class="r">
+			<%= javascript_tag "document.write(formatCurrency(#{spec.price.to_i}))" %>
+		</div>
+		<div id="spec_id_<%= spec.id %>" style="display:none;">
+			<p><%= spec.name %></p>
+			<%= split_rn(spec.info) %>
+		</div>
+	</li>
+<% end %>

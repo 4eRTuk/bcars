@@ -1,0 +1,12 @@
+<% if @person.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-error">
+      <%= "#{@person.errors.count} #{Russian.pluralize(@person.errors.count, 'ошибка', 'ошибки', 'ошибок')}!" %> 
+    </div>
+    <ul>
+    <% @person.errors.full_messages.each do |msg| %>
+      <li>* <%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

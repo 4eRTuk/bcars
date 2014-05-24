@@ -1,5 +1,5 @@
 <ul>
-	<% get_models(man_id).each do |model| %>
+	<% Manufacturer.find(man_id).models.each do |model| %>
 		<li> <%= link_to model.name, model, class:"c-link" %></li>
 	<% end %>
 </ul>

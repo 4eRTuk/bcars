@@ -1,14 +1,19 @@
 ﻿<header>
 <nav>
 	<table class="top-nav">
-	<tr><td style="width:300px;"><div class="logo"><%= link_to raw("#{image_tag("logo.png", :border => 0)} Batman Cars"), root_path, class:"c-link" %></div></td>
+	<tr><td style="width:300px;"><div id="logo" class="logo"><%= link_to raw("#{image_tag("logo.png", :border => 0)} Batman Cars"), root_path, class:"c-link" %></div></td>
 		<td><ul>
 			<li>Dodge ↓<%= render 'models/model', man_id: 3 %></li>
 			<li>Chrysler ↓<%= render 'models/model', man_id: 2 %></li>
 			<li>Jeep ↓<%= render 'models/model', man_id: 1 %></li>
-			<li>Инфо</li>
-			<li>Контакты</li>
-			<li>Вход</li>
+			<li><%= link_to "Инфо", info_path, class:"c-link" %></li>
+			<li><%= link_to "Контакты", contact_path, class:"c-link" %></li>
+			<li><% if signed_in? %>
+					<%= link_to "Профиль", current_user, class:"c-link" %>
+				<% else %>
+					<%= link_to "Войти", signin_path, class:"c-link" %>
+				<% end %>
+			</li>
 		</ul></td>
 		<td>
 			

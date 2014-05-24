@@ -1,0 +1,11 @@
+﻿<h1>Меню</h1>
+<%= form_tag('/addopt') do %>
+	<%= hidden_field_tag :id, @order.id %>
+	<%= select_tag :option_id, options_for_select(@options), class:"list" %>
+	<%= submit_tag "Добавить опцию", class:"c-link red-btn" %>
+<% end %>
+<%= form_tag('/addprep') do %>
+	<%= hidden_field_tag :id, @order.id %>
+	<%= select_tag :prep_id, options_for_select(@preparations), class:"list" %>
+	<%= submit_tag "Добавить услугу", class:"c-link red-btn" %>
+<% end %>

@@ -1,0 +1,31 @@
+<% preps.each do |prep| %>
+	<li>
+	<% if !del %>
+		<%= "[#{prep.type_of_preparation.name}] #{truncate(prep.name, :separator => ' ')}" %> 
+	<% else %>
+		<%= truncate(prep.name, :separator => ' ') %> 
+	<% end %>
+		<%= link_to "Подробнее", "#prep_id_#{prep.id}", rel: "facebox" %>
+		<% if show %>
+			<%= button_tag "Add", class:"add", data: { prep_id: prep.id, price: prep.price } %>
+		<% else %>
+			<% if admin? %>
+				<%= link_to "ред.", edit_preparation_path(prep) %>
+				<% if del %>
+					<%= form_tag('/removeprep', id: "rem_#{prep.id}", style:"float:right;") do %>
+						<%= hidden_field_tag :id, @order.id %>
+						<%= hidden_field_tag :prep_id, prep.id %>
+						<%= link_to "Удалить", "#", :onclick => "$('#rem_#{prep.id}').submit()" %>
+					<% end %>
+				<% end %>
+			<% end %>
+		<% end %>
+		<div id="d<%=prep.id%>" class="r">
+			<%= javascript_tag "document.getElementById('d#{prep.id}').innerHTML = (formatCurrency(#{prep.price.to_i}))" %>
+		</div>
+		<div id="prep_id_<%= prep.id %>" style="display:none;">
+			<p><%= prep.name %></p>
+			<%= split_rn(prep.info) %>
+		</div>
+	</li>
+<% end %>

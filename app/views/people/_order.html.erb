@@ -1,0 +1,18 @@
+<div>
+<h1>Заказы:</h1>
+<ul>
+<% @person.orders.each do |ord| %>
+	<li><%= "Заказ №#{ord.id} от #{ord.order_date.strftime("%d.%m.%Y")} на сумму " %>
+	<%= javascript_tag "document.write(formatCurrency(#{ord.car.price.to_i}))" %> [<%= ord.status.status%>]<br>
+	<%= "#{ord.car.model.name} #{ord.car.specification.name} [#{ord.car.engine.power} л.с./#{ord.car.engine.displacement/1000.0} л.]" %>
+	<%= link_to "Подробнее", "#ord_id_#{ord.id}", rel: "facebox" %>
+	<div id="ord_id_<%= ord.id %>" style="display:none;">
+		<p>Опции</p>
+		<ul><%= render 'options/option', show: false, opts: ord.options, del: false %></ul>
+		<p>Услуги</p>
+		<ul><%= render 'preparations/preparation', show: false, preps: ord.preparations, del: false %></ul>
+	</div>
+	<div class="r" style="width:30px;height:30px;margin:-15px 0;background:<%= get_color(ord.car.color) %>;"></div></li>
+<% end %>
+</ul>
+</div>

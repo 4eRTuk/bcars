@@ -1,0 +1,16 @@
+<% provide(:title, 'Все заказы') %>
+<% @left = render 'layouts/admin' %>
+<div class="content">
+<%= form_tag orders_path, :method => 'get' do %>
+
+<table class="list">
+	<tr>
+		<th><%= text_field_tag :q, params[:q], placeholder: 'По ИД, емайлу или ФИО, названию модели' %></th>
+		<th><%= select_tag :status_id, options_for_select(@status, params[:status_id]), prompt: "Все" %></th>
+	</tr>
+</table>
+<%= submit_tag "Фильтр", :name => nil, class: "red-btn" %>
+
+<div id="orders"><%= render 'orders' %></div>
+<% end %>
+</div>

@@ -1,0 +1,12 @@
+﻿[Тут типа ссылка на договор в пару страниц и чекбокс для согласия] Я соглашаюсь со всеми правилами бла-бла-бла<hr></br>
+<table border="0" class="total"><tr class="all"><td>Итого</td>
+<td id="total-sum" class="right"><%= javascript_tag "document.write(formatCurrency(#{@spec.price + @opts_sum + @preps_sum}))" %></td></tr>
+</table>
+<%= form_for(@car) do |f| %>
+<%= f.hidden_field :model, :value => @model.id %>
+<%= f.hidden_field :spec, :value => @spec.id %>
+<%= f.hidden_field :engine, :value => @engine.id %>
+<%= f.hidden_field :price, :value => @spec.price + @opts_sum + @preps_sum %>
+
+<%= f.submit "Подтвердить заказ", class:"c-link red-btn", id:"make-order" %>
+<% end %>

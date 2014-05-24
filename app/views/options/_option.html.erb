@@ -1,0 +1,31 @@
+<% opts.order(:type_id).each do |opt| %>
+	<li>
+	<% if !del %>
+		<%= raw "[#{opt.type_of_option.name}] #{truncate(opt.name, :separator => ' ')}"%> 
+	<% else %>
+		<%= truncate(opt.name, :separator => ' ') %> 
+	<% end %>
+		<%= link_to "Подробнее", "#opt_id_#{opt.id}", rel: "facebox" %>
+		<% if show %>
+			<%= button_tag "Add", class:"add", data: { opt_id: opt.id, price: opt.price } %>
+		<% else %>
+			<% if admin? %>
+				<%= link_to "ред.", edit_option_path(opt) %>
+				<% if del %>
+					<%= form_tag('/removeopt', id: "rem_#{opt.id}", style:"float:right;") do %>
+						<%= hidden_field_tag :id, @order.id %>
+						<%= hidden_field_tag :option_id, opt.id %>
+						<%= link_to "Удалить", "#", :onclick => "$('#rem_#{opt.id}').submit()" %>
+					<% end %>
+				<% end %>
+			<% end %>
+		<% end %>
+		<div id="d<%=opt.id%>" class="r">
+			<%= javascript_tag "document.getElementById('d#{opt.id}').innerHTML = (formatCurrency(#{opt.price.to_i}))" %>
+		</div>
+		<div id="opt_id_<%= opt.id %>" style="display:none;">
+			<p><%= opt.name %></p>
+			<%= split_rn(opt.info) %>
+		</div>
+	</li>
+<% end %>

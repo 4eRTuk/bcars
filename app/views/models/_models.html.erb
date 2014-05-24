@@ -1,0 +1,22 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<%= will_paginate @models %>
+<table class="list">
+	<tr>
+		<th><%= sortable "id" %></th>
+		<th><%= sortable "manufacturer_id" %></th>
+		<th><%= sortable "name" %></th>
+	</tr>
+	<% @models.each do |mod| %>
+			<tr>
+				<td><%= mod.id %></td>
+				<td><%= mod.manufacturer.name %></td>
+				<td><%= link_to "#{mod.name} (ред.)", edit_model_path(mod) %></td>
+			</tr>
+	<% end %>
+	
+	<% if @models.count == 0 %>
+		<p>Ничего не найдено</p>
+	<% end %>
+	</table>
+<%= will_paginate @models %>

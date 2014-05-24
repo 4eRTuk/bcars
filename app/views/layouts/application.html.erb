@@ -2,18 +2,25 @@
 <html>
 <head>
   <title><%= full_title(yield(:title)) %></title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <%= render 'layouts/shim' %>
   <%= favicon_link_tag 'favicon.ico' %>
 </head>
 <body>
-<div class="container">
+
+<div class="container jaw shadow">
+<% flash.each do |key, value| %>
+	<div class="alert alert-<%= key %>"><%= value %></div>
+<% end %>
+<% if admin? %>
+<%= render 'layouts/toppanel' %>
+<% end %>
 <%= render 'layouts/header' %>
-<div class="sidebar content"><%= @left %></div>
+<div id="left-sidebar" class="sidebar content jaw shadow"><%= @left %></div>
 <%= yield %>
-<div class="sidebar content"><%= @right %></div>
+<div class="sidebar content jaw shadow"><%= @right %></div>
 </div>
 </body>
 </html>

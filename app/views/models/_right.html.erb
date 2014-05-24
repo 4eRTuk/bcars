@@ -1,0 +1,20 @@
+﻿<table border="0" class="total">
+<tr class="summary"><td colspan="2"><%= @spec.name %></td></tr>
+<tr><td id="engine-sum" colspan="2">No info</td></tr>
+<tr class="summary"><td>Сумма</td>
+<td id="spec-sum" class="right">0</td></tr>
+
+<tr><td>Опции:</td>
+<td id="total-opts" class="right">0</td></tr>
+<tr class="summary"><td>Сумма</td>
+<td id="total-opts-sum" class="right">0</td></tr>
+
+<tr><td>Услуги:</td>
+<td id="total-preps" class="right">0</td></tr>
+<tr class="summary"><td>Сумма</td>
+<td id="total-preps-sum" class="right">0</td></tr>
+
+<tr class="all"><td>Итого</td>
+<td id="total-sum" class="right"><%= @spec.price %></td></tr>
+</table>
+<%= link_to "Оформить заказ", new_car_path, class:"c-link red-btn", id:"make-order" %>

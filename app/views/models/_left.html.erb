@@ -1,0 +1,27 @@
+Комплектации
+<ul>
+	<% @model.specifications.each do |spec| %>
+		<% if spec.id.to_i == get_spec_id.to_i %>
+			<% cls = ' class="selected"' %>
+		<% else %>
+			<% cls = '' %>
+		<% end %>
+		<%= raw "<li#{cls}>#{link_to spec.name, model_path(spec_id: spec.id), class: "c-link"}</li>" %>
+	<% end %>
+</ul>
+
+Двигатель
+<ul id="engines">
+	<% @spec.engines.each do |eng| %>
+		<li class="<%= eng.id %>">
+			<%= radio_button_tag(:engine, eng.id) %>
+			<%= label_tag(:engine, "#{eng.power} л.с. #{eng.displacement/1000.0} л.") %>
+			</br>
+			<%= link_to "Подробнее", "#eng_id_#{eng.id}", rel: "facebox" %>
+			<div id="eng_id_<%= eng.id %>" style="display:none;">
+				<p>Двигатель</p>
+				<%= split_rn(eng.info) %>
+			</div>
+		</li>
+	<% end %>
+</ul>

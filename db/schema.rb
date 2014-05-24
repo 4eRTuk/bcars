@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140428124416) do
+ActiveRecord::Schema.define(version: 20140519150548) do
 
   create_table "cars", force: true do |t|
-    t.integer  "manufacturer_id",  limit: 10, precision: 10, scale: 0, null: false
     t.integer  "model_id",         limit: 10, precision: 10, scale: 0, null: false
-    t.integer  "country_id",       limit: 10, precision: 10, scale: 0, null: false
-    t.datetime "assembling_date",                                      null: false
+    t.integer  "country_id",       limit: 10, precision: 10, scale: 0
+    t.datetime "assembling_date"
     t.string   "pts",              limit: 30
     t.decimal  "price",                       precision: 9,  scale: 2, null: false
     t.integer  "specification_id", limit: 10, precision: 10, scale: 0, null: false
     t.integer  "engine_id",        limit: 10, precision: 10, scale: 0, null: false
+    t.string   "color",            limit: 7
   end
 
   create_table "countries", force: true do |t|
@@ -58,7 +58,7 @@ ActiveRecord::Schema.define(version: 20140428124416) do
 
   create_table "models", force: true do |t|
     t.string  "name",            limit: 20,                          null: false
-    t.integer "manufacturer_id",            precision: 38, scale: 0
+    t.integer "manufacturer_id", limit: 10, precision: 10, scale: 0, null: false
   end
 
   create_table "options", force: true do |t|
@@ -75,21 +75,30 @@ ActiveRecord::Schema.define(version: 20140428124416) do
   end
 
   create_table "orders", force: true do |t|
-    t.integer  "car_id",         limit: 10, precision: 10, scale: 0, null: false
-    t.integer  "client_id",      limit: 10, precision: 10, scale: 0, null: false
-    t.integer  "manager_id",     limit: 10, precision: 10, scale: 0, null: false
-    t.datetime "order_date",                                         null: false
+    t.integer  "car_id",         limit: 10, precision: 10, scale: 0,             null: false
+    t.integer  "client_id",      limit: 10, precision: 10, scale: 0,             null: false
+    t.integer  "manager_id",     limit: 10, precision: 10, scale: 0,             null: false
+    t.datetime "order_date",                                                     null: false
     t.datetime "execution_date"
     t.integer  "insurance_id",   limit: 10, precision: 10, scale: 0
+    t.integer  "status_id",                 precision: 38, scale: 0, default: 0
   end
 
   create_table "person", force: true do |t|
-    t.string   "firstname",  limit: 30, null: false
-    t.string   "lastname",   limit: 30, null: false
-    t.string   "middlename", limit: 30, null: false
-    t.datetime "dob",                   null: false
-    t.string   "gender",     limit: 1
+    t.string   "firstname",       limit: 30,                                       null: false
+    t.string   "lastname",        limit: 30,                                       null: false
+    t.string   "middlename",      limit: 30,                                       null: false
+    t.datetime "dob",                                                              null: false
+    t.string   "gender",          limit: 1
+    t.string   "password_digest",                                                  null: false
+    t.string   "email",           limit: 320,                                      null: false
+    t.integer  "acs_level",                   precision: 38, scale: 0, default: 0, null: false
+    t.string   "remember_token"
+    t.string   "phone",           limit: 11
   end
+
+  add_index "person", ["email"], name: "index_person_on_email", unique: true
+  add_index "person", ["remember_token"], name: "index_person_on_remember_token"
 
   create_table "position", force: true do |t|
     t.string "name", limit: 30, null: false
@@ -111,6 +120,16 @@ ActiveRecord::Schema.define(version: 20140428124416) do
     t.string  "name",     limit: 40,                            null: false
     t.string  "info",     limit: 4000
     t.integer "model_id",              precision: 38, scale: 0
+    t.integer "price",                 precision: 38, scale: 0
+  end
+
+  create_table "specs_engines", id: false, force: true do |t|
+    t.integer "specification_id", precision: 38, scale: 0
+    t.integer "engine_id",        precision: 38, scale: 0
+  end
+
+  create_table "statuses", force: true do |t|
+    t.string "status"
   end
 
   create_table "telephone_numbers", force: true do |t|
@@ -131,7 +150,7 @@ ActiveRecord::Schema.define(version: 20140428124416) do
   end
 
   create_table "type_of_preparation", force: true do |t|
-    t.string "name", limit: 20, null: false
+    t.string "name", limit: nil, null: false
   end
 
   create_table "version_of_insurance", force: true do |t|
@@ -140,7 +159,6 @@ ActiveRecord::Schema.define(version: 20140428124416) do
 
   add_foreign_key "cars", "countries", name: "sys_c0069575"
   add_foreign_key "cars", "engine", name: "sys_c0069577"
-  add_foreign_key "cars", "manufacturers", name: "sys_c0069574"
   add_foreign_key "cars", "models", name: "sys_c0087623"
   add_foreign_key "cars", "specifications", name: "sys_c0069576"
 
@@ -151,6 +169,8 @@ ActiveRecord::Schema.define(version: 20140428124416) do
 
   add_foreign_key "insurance", "type_of_insurance", column: "type_id", name: "sys_c0069607"
   add_foreign_key "insurance", "version_of_insurance", column: "version_id", name: "sys_c0069608"
+
+  add_foreign_key "models", "manufacturers", name: "sys_c00179020"
 
   add_foreign_key "options", "type_of_option", column: "type_id", name: "sys_c0069636"
 

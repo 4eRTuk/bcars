@@ -1,7 +1,26 @@
 Bcars::Application.routes.draw do
-  resources :cars, only: [:show, :index]
-  resources :models
+  resources :cars, except: [:destroy, :index, :show, :edit]
+  resources :people, except: [:destroy]
+  resources :orders, only: [:index, :show, :update]
+  
+  resources :models, except: [:destroy]
+  resources :specifications, except: [:destroy, :show, :index]
+  resources :options, except: [:destroy, :show, :index]
+  resources :preparations, except: [:destroy, :show]
+  
+  resources :sessions, only: [:new, :create, :destroy]
+  
   root 'static_pages#home'
+  post 'addengine' => 'specifications#add'
+  post 'removeeng' => 'specifications#rem'
+  post 'addopt' => 'orders#addopt'
+  post 'addprep' => 'orders#addprep'
+  post 'removeopt' => 'orders#remopt'
+  post 'removeprep' => 'orders#remprep'
+  get 'info' => 'static_pages#info'
+  get 'contact' => 'static_pages#contact'
+  match '/signin',  to: 'sessions#new',         via: 'get'
+  match '/signout', to: 'sessions#destroy',     via: 'delete'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

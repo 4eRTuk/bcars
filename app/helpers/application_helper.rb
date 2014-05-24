@@ -10,18 +10,54 @@ module ApplicationHelper
 		end
 	end
 	
-	def get_models(man_id)
-		#models = Car.where(manufacturer_id: man_id).uniq.pluck(:model_id)
-		Model.where(MANUFACTURER_ID: man_id).order(:name)
+	def sortable(column, title = nil)
+		title ||= column.titleize
+		css_class = column == sort_column ? "current #{sort_direction}" : nil
+		direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
+		link_to title, params.merge(:sort => column, :direction => direction, :page => nil), {:class => css_class}
 	end
 	
-	def get_top
-		tmp = raw "Топ 10 самых продаваемых<ul>"
+	def get_spec_id
+		if params[:spec_id].nil?
+			spec_id = @model.specifications.first.id
+		else
+			spec_id = params[:spec_id]
+		end
+	end
+
+	def admin?
+		if !current_user.nil?
+			current_user.acs_level > 0
+		else
+			false
+		end
+	end
+	
+	def split_rn(data)
+		tmp = raw "<ul>"
 		
-		OCI8.new('s160645', 'nwr508', 'test').exec('select * from TOP_CARS_BY_ORDERS where ROWNUM <= 10') do |r|
-			tmp += raw "<li>#{r[0]} (#{number_to_human r[1]})</li>"
+		data.split('\r\n').each do |opt|
+			tmp += raw "<li>#{opt}</li>"
 		end
 		
-		tmp += raw "</ul>"
+		tmp += raw '</ul>'
+	end
+
+	def to_rus(str)
+		str.force_encoding("cp1251").encode("utf-8", undef: :replace)
+	end
+	
+	def fill_content
+		a = ['<h3>Тут типа новости</h3>', 'Для наполнения сайдбара']
+		20.times { a.push(a[1]) }
+		raw a.join("<br>")
+	end
+	
+	def get_color(clr)
+		if !clr || clr.blank?
+			'#fff'
+		else
+			clr
+		end
 	end
 end

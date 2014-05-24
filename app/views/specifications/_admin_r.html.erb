@@ -1,0 +1,6 @@
+<h1>Меню</h1>
+<%= form_tag('/addengine') do %>
+	<%= hidden_field_tag :id, @spec.id %>
+	<%= select_tag :engine_id, options_for_select(@engines), class:"list" %>
+	<%= submit_tag "Привязать двигатель", class:"c-link red-btn" %>
+<% end %>

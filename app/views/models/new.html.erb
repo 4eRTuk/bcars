@@ -1,0 +1,18 @@
+<% provide(:title, "Новая модель") %>
+<% @left = render 'layouts/admin' %>
+<% @right = fill_content %>
+
+<div class="content">
+<h1>Создание новой модели</h1>
+<%= form_for(@model) do |f| %>
+    <%= render 'err_msg' %>
+
+	<%= f.label :manufacturer_id, "Марка" %>
+	<%= f.select :manufacturer_id, options_for_select(@mans, params[:manufacturer_id]) %>
+	
+	<%= f.label :name, "Название" %>
+	<%= f.text_field :name %>
+	
+	<%= f.submit "Создать", class:"c-link red-btn" %>
+<% end %>
+</div>

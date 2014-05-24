@@ -1,18 +1,18 @@
 class Specification < ActiveRecord::Base
-	# specify schema and table name
 	self.table_name = "SPECIFICATIONS"
-	# specify primary key name
-	#self.primary_key "ID"
-  # specify sequence name
-  #self.sequence_name "hr.hr_employee_s"
-  # set which DATE columns should be converted to Ruby Date
-  #set_date_columns :hired_on, :birth_date_on
-  # set which DATE columns should be converted to Ruby Time
-  #set_datetime_columns :last_login_time
-  # set which VARCHAR2 columns should be converted to true and false
-  #set_boolean_columns :manager, :active
-  # set which columns should be ignored in ActiveRecord
-  #ignore_table_columns :attribute1, :attribute2
-
+	self.sequence_name = "SPECIFICATIONS_ID_SEQ"
+	#self.primary_key = "ID"
+	has_and_belongs_to_many :engines, :join_table => "specs_engines"
+	belongs_to :model
+	validates :name,  presence: true, length: { maximum: 40 }
+	validates :model_id,  presence: true
+	validates :price,  presence: true
+	validates :info,  length: { maximum: 4000 }
+	validate :validate_id
 	
+	private
+
+	def validate_id
+		errors.add(:model_id, "неверное!") unless Model.exists?(self.model_id)
+	end
 end

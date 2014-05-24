@@ -1,0 +1,28 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<%= will_paginate @people %>
+<table class="list">
+	<tr>
+		<th><%= sortable "id" %></th>
+		<th><%= sortable "email" %></th>
+		<th><%= sortable "lastname" %></th>
+		<th><%= sortable "firstname" %></th>
+		<th><%= sortable "middlename" %></th>
+		<th><%= sortable "phone" %></th>
+	</tr>
+	<% @people.each do |ord| %>
+			<tr>
+				<td style="width:10%;"><%= link_to ord.id, ord %></td>
+				<td><%= ord.email %></td>
+				<td><%= ord.lastname %></td>
+				<td><%= ord.firstname %></td>
+				<td><%= ord.middlename %></td>
+				<td><%= ord.phone %></td>
+			</tr>
+	<% end %>
+	
+	<% if @people.count == 0 %>
+		<p>Ничего не найдено</p>
+	<% end %>
+	</table>
+<%= will_paginate @people %>

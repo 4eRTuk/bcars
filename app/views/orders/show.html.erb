@@ -1,0 +1,43 @@
+<%= javascript_include_tag :models %>
+<% provide(:title, "Заказ №#{@order.id}") %>
+
+<% if admin? %>
+	<% @left = render 'layouts/admin' %>
+<% else %>
+	<% @left = render 'layouts/top' %>
+<% end %>
+
+<% @right = render 'admin_r' %>
+
+<div class="content"><p class="title"><%= "Заказ №#{@order.id}" %></p>
+<%= render 'err_msg' %>
+
+	<div class="block">
+	<%= form_for(@order) do |f| %>
+		<table><tr><td>Заказ сделан</td>
+		<td><%= link_to raw( "#{@order.person.email} <br> #{@order.person.lastname} #{@order.person.firstname} #{@order.person.middlename}"), @order.person, class:"m-link" %></td></tr>
+		<tr><td>Текущий статус</td><td><%= f.select :status_id, options_for_select(@status, @order.status_id) %></td></tr>
+		<tr><td>Дата заказа</td><td><%= @order.order_date.strftime("%d.%m.%Y %H:%M") %></td></tr>
+		<tr><td>Дата выполнения</td><td><%= f.date_select :execution_date %></td></tr>
+		<tr><td>Общая цена</td><td><%= javascript_tag "document.write(formatCurrency(#{@order.car.price}))" %></td></tr></table>
+	<%= f.submit "Сохранить", class:"c-link red-btn" %>
+	<% end %>
+	
+		<%= form_for(@order.car) do |f| %>
+		
+		<table class="list">
+		<tr><td>Авто</td><td><%= "#{@order.car.model.manufacturer.name} #{@order.car.model.name}" %></td></tr>
+		<tr><td>Спецификация</td><td><%= "#{@order.car.specification.name}" %></td></tr>
+		<tr><td>Двигатель</td><td><%= "#{@order.car.engine.model}" %></td></tr>
+		<tr><td>ПТС</td><td><%= f.text_field :pts, maxlength: 30 %></td></tr>
+		<tr><td>Цвет</td><td><%= f.text_field :color, maxlength: 7 %></td></tr>
+		<tr><td>Страна</td><td><%= f.select :country_id, options_for_select(@country, @order.car.country_id) %></td></tr>
+		<tr><td>Дата сборки</td><td><%= f.date_select :assembling_date %></td></tr></table>	
+		
+		<%= f.submit "Сохранить", class:"c-link red-btn" %>
+		<% end %>
+	</div>
+	
+	<div class="block">Опции<ul><%= render 'options/option', show: false, opts: @order.options, del: true %></ul></div>
+	<div class="block">Услуги<ul><%= render 'preparations/preparation', show: false, del: true, preps: @preps %></ul></div>
+</div>

@@ -1,0 +1,12 @@
+<% if @opt.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-error">
+      <%= "#{@opt.errors.count} #{Russian.pluralize(@opt.errors.count, 'ошибка', 'ошибки', 'ошибок')}!" %> 
+    </div>
+    <ul>
+    <% @opt.errors.full_messages.each do |msg| %>
+      <li>* <%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

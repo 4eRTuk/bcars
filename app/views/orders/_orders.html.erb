@@ -1,0 +1,26 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<%= will_paginate @orders %>
+<table class="list">
+	<tr>
+		<th><%= sortable "id" %></th>
+		<th><%= sortable "client_id" %></th>
+		<th><%= sortable "car_id" %></th>
+		<th><%= sortable "order_date" %></th>
+		<th><%= sortable "status_id" %></th>
+	</tr>
+	<% @orders.each do |ord| %>
+			<tr>
+				<td style="width:10%;"><%= link_to ord.id, ord %></td>
+				<td><%= "#{ord.person.email} #{ord.person.firstname} #{ord.person.lastname}" %></td>
+				<td><%= "#{ord.car.model.manufacturer.name} #{ord.car.model.name}" %></td>
+				<td><%= ord.order_date.strftime("%d.%m.%Y %H:%M") %></td>
+				<td><%= ord.status.status %></td>
+			</tr>
+	<% end %>
+	
+	<% if @orders.count == 0 %>
+		<p>Ничего не найдено</p>
+	<% end %>
+	</table>
+<%= will_paginate @orders %>

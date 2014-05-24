@@ -1,5 +1,5 @@
-<ul class="spec-list">
-	<% @specs.find(get_spec_id).info.split('\r\n').each do |spec| %>
+<ul>
+	<% @spec.info.split('\r\n').each do |spec| %>
 		<li> <%= spec %></li>
 	<% end %>
 </ul>

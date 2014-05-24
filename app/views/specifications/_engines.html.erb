@@ -1,0 +1,11 @@
+<% @spec.engines.each do |eng| %>
+	<li>
+		<%= raw "#{eng.info}<br>#{eng.power} л.с. #{eng.displacement/1000.0} л. #{eng.type_of_engine.name}" %>
+		
+		<%= form_tag('/removeeng', id: "rem_#{eng.id}", style:"float:right;") do %>
+			<%= hidden_field_tag :id, @spec.id %>
+			<%= hidden_field_tag :engine_id, eng.id %>
+			<%= link_to "Удалить", "#", :onclick => "$('#rem_#{eng.id}').submit()" %>
+		<% end %>
+	</li>
+<% end %>

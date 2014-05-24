@@ -1,0 +1,69 @@
+<% provide(:title, "Регистрация") %>
+<% @left = render 'layouts/top' %>
+<% @right = fill_content %>
+
+<div class="content">
+<h1>Всего три шага к успеху!</h1>
+<%= form_for(@person) do |f| %>
+    <%= render 'layouts/err_msg' %>
+
+	<table border="0" class="total">
+    <tr>
+	<th>1</th>
+	<th>2</th>
+	<th>3</th>
+	</tr>
+	
+	<tr>
+	<td>
+		<%= f.label :email, "Адрес email" %>
+		<%= f.text_field :email %>
+	</td>
+	<td>
+		<%= f.label :firstname, "Имя" %>
+		<%= f.text_field :firstname %>
+	</td>
+	<td>
+		<%= f.label :dob, "Дата рождения" %>
+		<%= f.date_field :dob %>
+	</td>
+	</tr>
+
+	<tr>
+	<td>
+		<%= f.label :password, "Пароль" %>
+		<%= f.password_field :password %>
+	</td>
+	<td>
+		<%= f.label :lastname, "Фамилия" %>
+		<%= f.text_field :lastname %>
+	</td>
+	<td>
+		<%= f.label :gender, "Пол" %><br>
+		<%= f.select :gender, options_for_select([['Мужской', 'м'], ['Женский', 'ж']], 2) %>
+	</td>
+	</tr>
+
+	<tr>
+	<td>
+		<%= f.label :password_confirmation, "Подтверждение пароля" %>
+		<%= f.password_field :password_confirmation %>
+	</td>
+	<td>
+		<%= f.label :middlename, "Отчество" %>
+		<%= f.text_field :middlename %>
+	</td>
+	<td>
+		<%= f.label :phone, "Телефон" %><br>
+		<%= f.text_field :phone, maxlength: 11 %>
+	</td>
+	</tr>	
+	</table>
+	
+	<%= f.submit "Зарегистрироваться", class:"c-link red-btn" %>
+<% end %>
+
+	<%= form_tag(signin_path, method: "get") do %>
+		<%= button_tag "Войти", class:"с-link gray-btn" %>
+	<% end %>
+</div>

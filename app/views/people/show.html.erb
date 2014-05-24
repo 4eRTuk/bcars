@@ -1,0 +1,11 @@
+<% provide(:title, "#{@person.firstname} #{@person.middlename} #{@person.lastname}") %>
+<% if admin? %>
+	<% @left = render 'layouts/admin' %>
+<% else %>
+	<% @left = render 'layouts/top' %>
+<% end %>
+<% @right = render 'person' %>
+
+<div class="content">
+	<%= render 'order' %>
+</div>

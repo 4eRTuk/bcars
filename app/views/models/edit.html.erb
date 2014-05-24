@@ -1,0 +1,23 @@
+<% provide(:title, "Изменить модель") %>
+<% @left = render 'layouts/admin' %>
+<% @right = render 'admin_r2' %>
+
+<div class="content">
+<h1>Изменение модели</h1>
+<%= form_for(@model) do |f| %>
+    <%= render 'err_msg' %>
+
+	<%= f.label :manufacturer_id, "Марка" %>
+	<%= f.select :manufacturer_id, options_for_select(@mans, @model.manufacturer_id) %>
+	
+	<%= f.label :name, "Название" %>
+	<%= f.text_field :name %>
+	
+	<%= f.submit "Изменить", class:"c-link red-btn" %>
+<% end %>
+
+Комплектации:
+<ul><%= render 'specifications/specifications' %></ul>
+Опции:
+<ul><%= render 'options/option', show: false, opts: @model.options, del: false %></ul>
+</div>

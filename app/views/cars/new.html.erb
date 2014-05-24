@@ -1,0 +1,53 @@
+<%= javascript_include_tag :cars %>
+<% provide(:title, "Новый заказ") %>
+<% @left = render 'layouts/top' %>
+<% @right = render 'confirm' %>
+
+<div class="content pre-show">
+<div class="confirm-info">
+<%= image_tag("#{@model.name}.jpg", :border => 0) %>
+<ul class="min-info">
+<li><%= "#{@model.manufacturer.name} #{@model.name}" %></li>
+<li>
+	<%= "Комплектация #{@spec.name}" %>
+	<%= link_to "Подробнее", "#spec_id_#{@spec.id}", rel: "facebox" %>
+	<div id="spec_id_<%= @spec.id %>" style="display:none;"><p><%= @spec.name %></p><%= render 'specifications/specification', spec: @spec %></div>
+</li>
+<li>
+	<%= "Двигатель #{@engine.power} л.с. #{@engine.displacement/1000.0} л." %>
+	<%= link_to "Подробнее", "#eng_id_#{@engine.id}", rel: "facebox" %>
+	<div id="eng_id_<%= @engine.id %>" style="display:none;"><%= split_rn(@engine.info) %></div>
+</li>
+<li style=<%= raw "\"background-color:#{cookies[:color]};\"" %>>
+	Выбранный цвет: <%= cookies[:color_name] %>
+</li>
+<li class="selected">
+	Сумма: <div id="spec-sum" class="r"><%= javascript_tag "document.write(formatCurrency(#{@spec.price}))" %></div>
+</li>
+</ul>
+</div>
+
+Опции:
+<% if !@opts.blank? %>
+<ul>
+<%= render 'options/option', show: false, del: false, opts: @opts %>
+<li class="selected">
+	Сумма: <div id="opts-sum" class="r"><%= javascript_tag "document.write(formatCurrency(#{@opts_sum}))" %></div>
+</li>
+</ul>
+<% else %>
+Вы ничего не выбрали
+<% end %>
+</br>
+Услуги:
+<% if !@preps.blank? %>
+<ul>
+<%= render 'preparations/preparation', show: false, del: false, preps: @preps %>
+<li class="selected">
+	Сумма: <div id="preps-sum" class="r"><%= javascript_tag "document.write(formatCurrency(#{@preps_sum}))" %></div>
+</li>
+</ul>
+<% else %>
+Вы ничего не выбрали
+<% end %>
+</div>

@@ -1,0 +1,6 @@
+<% provide(:title, 'Все услуги') %>
+<% @left = render 'layouts/admin' %>
+<% @right = render 'admin_r' %>
+<div class="content">
+<ul><%= render 'preparation', show: false, del: false, preps: @preps %></ul>
+</div>
