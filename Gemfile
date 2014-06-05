@@ -13,8 +13,8 @@ gem 'jquery-rails'
 gem 'jquery-cookie-rails'
 gem 'jbuilder', '~> 1.2'
 
-gem "activerecord-oracle_enhanced-adapter", "~> 1.5.0"
-gem 'ruby-oci8', '~> 2.1.5'
+#gem "activerecord-oracle_enhanced-adapter", "~> 1.5.0"
+#gem 'ruby-oci8', '~> 2.1.5'
 
 gem 'pg'
 
