@@ -10,5 +10,6 @@
  *
  *= require_self
  *= require jquery.facebox
+ *= require bootstrap-colorpicker
  *= require_tree .
  */

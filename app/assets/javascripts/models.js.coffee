@@ -47,14 +47,31 @@ $(document).ready ->
 		clr = rgb2hex($(this).css("backgroundColor"))
 		clr_name = $(this).attr("title")
 		return
-		
+	
+	$(".colors .new-color").click (e) ->
+		$(".colors div").each ->
+			$(this).removeClass "clr-selected"
+			$(this).text ""
+			return
+
+		$(this).addClass "clr-selected"
+		clr = rgb2hex($(this).css("backgroundColor"))
+		clr_name = rgb2hex($(this).css("backgroundColor"))
+		return
+
+	$('#color').colorpicker('hide').on "changeColor", (ev) ->
+		$(this).css "background", ev.color.toHex()
+		clr = ev.color.toHex()
+		clr_name = ev.color.toHex()
+		return
+	
 	$("#tab_c2 .add").click (e) ->
 		o_id = $.inArray($(this).attr("data-opt-id"), opts)
 		
 		if o_id is -1
 			opts.push $(this).attr("data-opt-id")
 			$(this).text "Added"
-			$(this).css "background", "#BB0000"      
+			$(this).css "background", "#BB0000"
 			optSum += parseInt($(this).attr("data-price"))
 			totalSum += parseInt($(this).attr("data-price"))
 		else

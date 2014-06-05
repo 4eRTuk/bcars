@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+	before_action :not_signed, only: [:new, :create]
 
 def new
 end
@@ -18,5 +19,11 @@ def destroy
 	sign_out
     redirect_to root_url
 end
+
+	private
+	
+	def	not_signed
+		redirect_to person_path(current_user), notice: "Сначала нужно выйти из текущего аккаунта!" unless !signed_in?
+	end
 
 end

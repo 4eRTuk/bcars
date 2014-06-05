@@ -2,7 +2,12 @@ class OptionsController < ApplicationController
 before_action :preps, only: [:edit, :update]
 before_action :tps, only: [:edit, :update, :new, :create]
 before_action :signed_in_user, only: [:edit, :update, :new, :create]
-before_action :user_acs_level,   only: [:edit, :update, :new, :create]
+before_action only: [:edit, :new] do
+	user_acs_level 1
+end
+before_action only: [:update, :create] do
+	user_acs_level 99
+end
 
 def edit
 end
@@ -39,7 +44,7 @@ def create
 	
 	if @opt.save
 		flash[:success] = "Новая оцпия успешно создана"
-		redirect_to edit_option_path(@opt.id+1)
+		redirect_to edit_option_path(@opt.id)
 		cookies.delete(:model_id)
 	else
 		render 'new'

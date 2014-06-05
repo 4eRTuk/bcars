@@ -1,4 +1,5 @@
 Комплектации
+<% if !@spec.nil? %>
 <ul>
 	<% @model.specifications.each do |spec| %>
 		<% if spec.id.to_i == get_spec_id.to_i %>
@@ -9,8 +10,14 @@
 		<%= raw "<li#{cls}>#{link_to spec.name, model_path(spec_id: spec.id), class: "c-link"}</li>" %>
 	<% end %>
 </ul>
+<% else %>
+<h3>Отсутствуют комплектации для модели</h3>
+<% end %>
 
 Двигатель
+<% if @spec.nil? || @model.specifications.count == 0 %>
+<h3>Отсутствуют двигатели для комплектации</h3>
+<% else %>
 <ul id="engines">
 	<% @spec.engines.each do |eng| %>
 		<li class="<%= eng.id %>">
@@ -19,9 +26,10 @@
 			</br>
 			<%= link_to "Подробнее", "#eng_id_#{eng.id}", rel: "facebox" %>
 			<div id="eng_id_<%= eng.id %>" style="display:none;">
-				<p>Двигатель</p>
+				<p><%= "#{eng.model} (#{eng.type_of_engine.name})" %></p>
 				<%= split_rn(eng.info) %>
 			</div>
 		</li>
 	<% end %>
 </ul>
+<% end %>

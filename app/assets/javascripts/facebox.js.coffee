@@ -10,3 +10,4 @@ jQuery ->
 #$(document).bind "loading.facebox", ->
  # $(document).unbind "keydown.facebox"
   #$("#facebox_overlay").unbind "click"
+  

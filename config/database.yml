@@ -3,14 +3,19 @@
 #
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
+#development:
+  #adapter: oracle_enhanced
+  #host: localhost
+  #port: 1521
+  #database: /ORBIS
+  #username: s160645
+  #password: nwr508
 development:
-  adapter: oracle_enhanced
+  adapter: postgresql
   host: localhost
-  port: 1521
-  database: /ORBIS
-  username: s160645
-  password: nwr508
-
+  username: postgres
+  password: postgre5QL
+  database: kursachev
 #development:
   #adapter: sqlite3
   #database: db/development.sqlite3

@@ -1,5 +1,6 @@
 <% provide(:title, 'Все клиенты') %>
 <% @left = render 'layouts/admin' %>
+<% @right = render 'right' %>
 <div class="content">
 <%= form_tag people_path, :method => 'get' do %>
 

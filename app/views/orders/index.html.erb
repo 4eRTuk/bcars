@@ -1,5 +1,6 @@
 <% provide(:title, 'Все заказы') %>
 <% @left = render 'layouts/admin' %>
+<% @right = render 'right' %>
 <div class="content">
 <%= form_tag orders_path, :method => 'get' do %>
 

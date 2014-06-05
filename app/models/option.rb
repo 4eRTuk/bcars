@@ -1,9 +1,9 @@
 class Option < ActiveRecord::Base
 	# specify schema and table name
-	self.table_name = "OPTIONS"
+	#self.table_name = "OPTIONS"
 	#self.primary_key = "ID"
-	self.sequence_name = "OPTIONS_ID_SEQ"
-	has_and_belongs_to_many :orders, :join_table => "OPTIONS_ORDER"
+	#self.sequence_name = "OPTIONS_ID_SEQ"
+	has_and_belongs_to_many :orders, :join_table => "options_order"
 	belongs_to :type_of_option, :foreign_key => "type_id"
 	belongs_to :model
 	validates :name, presence: true, length: { maximum: 40 }

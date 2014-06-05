@@ -1,5 +1,7 @@
+<% if !@spec.nil? %>
 <ul>
 	<% @spec.info.split('\r\n').each do |spec| %>
 		<li> <%= spec %></li>
 	<% end %>
 </ul>
+<% end %>

@@ -7,7 +7,7 @@
 <%= hidden_field_tag 'spec', get_spec_id %>
 
 <div class="content"><p class="title"><%= "#{@model.manufacturer.name} #{@model.name}" %></p>
-<%= image_tag("#{@model.name}.jpg", :border => 0) %>
+<%= image_tag serve_model_path(@model) %>
 <div class="colors"><%= render 'colors' %></div>
 
 <section class="tabs">
@@ -15,7 +15,7 @@
 	<input id="tab_2" type="radio" name="tab" />
 	<input id="tab_3" type="radio" name="tab" />
 	
-	<label for="tab_1" id="tab_l1"><%= @spec.name %></label>
+	<label for="tab_1" id="tab_l1"><%= @spec.name unless @spec.nil? %></label>
 	<label for="tab_2" id="tab_l2">Опции</label>
 	<label for="tab_3" id="tab_l3">Предподготовка</label>
 	<div style="clear:both"></div>

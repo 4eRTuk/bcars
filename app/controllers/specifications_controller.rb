@@ -2,7 +2,12 @@ class SpecificationsController < ApplicationController
 before_action :speca, only: [:edit, :update, :rem, :add]
 before_action :mdl
 before_action :signed_in_user, only: [:edit, :update, :new, :create, :add, :rem]
-before_action :user_acs_level,   only: [:edit, :update, :new, :create, :add, :rem]
+before_action only: [:edit, :new] do
+	user_acs_level 1
+end
+before_action only: [:update, :create, :add, :rem] do
+	user_acs_level 99
+end
 
 def edit
 end
@@ -52,7 +57,7 @@ def create
 	
 	if @spec.save
 		flash[:success] = "Новая комплектация #{@spec.id} успешно создана"
-		redirect_to edit_specification_path(@spec.id+1)
+		redirect_to edit_specification_path(@spec.id)
 		cookies.delete(:model_id)
 	else
 		render 'new'

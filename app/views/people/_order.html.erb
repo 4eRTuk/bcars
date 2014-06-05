@@ -4,7 +4,7 @@
 <% @person.orders.each do |ord| %>
 	<li><%= "Заказ №#{ord.id} от #{ord.order_date.strftime("%d.%m.%Y")} на сумму " %>
 	<%= javascript_tag "document.write(formatCurrency(#{ord.car.price.to_i}))" %> [<%= ord.status.status%>]<br>
-	<%= "#{ord.car.model.name} #{ord.car.specification.name} [#{ord.car.engine.power} л.с./#{ord.car.engine.displacement/1000.0} л.]" %>
+	<%= "#{ord.car.model.manufacturer.name} #{ord.car.model.name} #{ord.car.specification.name} [#{ord.car.engine.power} л.с./#{ord.car.engine.displacement/1000.0} л.]" %>
 	<%= link_to "Подробнее", "#ord_id_#{ord.id}", rel: "facebox" %>
 	<div id="ord_id_<%= ord.id %>" style="display:none;">
 		<p>Опции</p>

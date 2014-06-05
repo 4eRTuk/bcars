@@ -1,7 +1,9 @@
 class CarsController < ApplicationController
 	helper_method :sort_column, :sort_direction
 	before_action :signed_in_user, only: [:new, :update, :create]
-	before_action :user_acs_level,   only: [:update]
+	before_action only: [:update] do
+		user_acs_level 99
+	end
 	
 	def new
 		@model = Model.find(cookies[:model])
@@ -10,14 +12,24 @@ class CarsController < ApplicationController
 		
 		@opts_sum = 0
 		if !cookies[:opts].blank?
-			@opts = Option.where(id: cookies[:opts].split(","))
-			@opts_sum = Option.sum(:price, :conditions => {:id => cookies[:opts].split(",")}).to_i
+			ids = Array.new
+			cookies[:opts].split(",").each do |o|
+				ids << o.to_i
+			end
+			
+			@opts = Option.where(id: ids)
+			@opts_sum = Option.where(id: ids).sum(:price).to_i
 		end
 		
 		@preps_sum = 0
 		if !cookies[:preps].blank?
-			@preps = Preparation.find(cookies[:preps].split(","))
-			@preps_sum = Preparation.sum(:price, :conditions => {:id => cookies[:preps].split(",")}).to_i
+			ids = Array.new
+			cookies[:preps].split(",").each do |o|
+				ids << o.to_i
+			end
+			
+			@preps = Preparation.find(ids)
+			@preps_sum = Preparation.where(id: ids).sum(:price).to_i
 		end
 		
 		@car = Car.new
@@ -26,30 +38,34 @@ class CarsController < ApplicationController
 	def create
 		@car = Car.new(model_id: cookies[:model], specification_id: cookies[:spec], engine_id: cookies[:engine], color: cookies[:color])
 		@car.price = Specification.find(cookies[:spec]).price
-		@order = Order.new(car_id: @car.id, client_id: current_user.id, manager_id: 1, order_date: Time.zone.now)
-				
+		@order = Order.new(car_id: @car.id, client_id: current_user.id, order_date: Time.zone.now)
+		
 		if !cookies[:opts].blank?
+			ids = Array.new
+			cookies[:opts].split(",").each do |o|
+				ids << o.to_i
+			end
 			
-			
-			@car.price += Option.sum(:price, :conditions => {:id => cookies[:opts].split(",")}).to_i
+			@car.price += Option.where(id: ids).sum(:price).to_i
 		end
 		
 		if !cookies[:preps].blank?
+			ids = Array.new
+			cookies[:preps].split(",").each do |o|
+				ids << o.to_i
+			end
 			
-			
-			@car.price += Preparation.sum(:price, :conditions => {:id => cookies[:preps].split(",")}).to_i
+			@car.price += Preparation.where(id: ids).sum(:price).to_i
 		end	
 		
 		if @car.save
-			@order.car_id = @car.id+1
+			@order.car_id = @car.id
 			if @order.save
-				@order = Order.find(@order.id+1)
-				
 				Preparation.find(cookies[:preps].split(",")).each do |prep|
 					@order.preparations << prep
 				end
 
-				Option.where(id: cookies[:opts].split(",")).each do |opt|
+				Option.find(cookies[:opts].split(",")).each do |opt|
 					@order.options << opt
 				end
 

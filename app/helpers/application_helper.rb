@@ -19,7 +19,7 @@ module ApplicationHelper
 	
 	def get_spec_id
 		if params[:spec_id].nil?
-			spec_id = @model.specifications.first.id
+			spec_id = @model.specifications.first.id unless @model.specifications.count == 0
 		else
 			spec_id = params[:spec_id]
 		end
@@ -48,7 +48,7 @@ module ApplicationHelper
 	end
 	
 	def fill_content
-		a = ['<h3>Тут типа новости</h3>', 'Для наполнения сайдбара']
+		a = ['<h3>Новости</h3>', 'Здесь новости']
 		20.times { a.push(a[1]) }
 		raw a.join("<br>")
 	end

@@ -1,6 +1,6 @@
 class Specification < ActiveRecord::Base
-	self.table_name = "SPECIFICATIONS"
-	self.sequence_name = "SPECIFICATIONS_ID_SEQ"
+	#self.table_name = "SPECIFICATIONS"
+	#self.sequence_name = "SPECIFICATIONS_ID_SEQ"
 	#self.primary_key = "ID"
 	has_and_belongs_to_many :engines, :join_table => "specs_engines"
 	belongs_to :model

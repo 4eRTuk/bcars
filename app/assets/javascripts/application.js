@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.cookie
 //= require jquery.facebox
+//= require bootstrap-colorpicker
 //= require facebox
 
 	function formatCurrency(val) {

@@ -1,13 +1,13 @@
 class Car < ActiveRecord::Base
 	# specify schema and table name
-	self.table_name = "CARS"
+	#self.table_name = "CARS"
 	# specify primary key name
 	# self.primary_key = "ID"
 	#self.primary_key = "ID"
 	# specify sequence name
-	self.sequence_name = "CARS_ID_SEQ"
+	#self.sequence_name = "CARS_ID_SEQ"
 	# set which DATE columns should be converted to Ruby Date
-	set_date_columns :assembling_date
+	#set_date_columns :assembling_date
   
 	# set which DATE columns should be converted to Ruby Time
 	#set_datetime_columns :last_login_time

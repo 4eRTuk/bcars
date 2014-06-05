@@ -16,7 +16,10 @@
 <li>
 	<%= "Двигатель #{@engine.power} л.с. #{@engine.displacement/1000.0} л." %>
 	<%= link_to "Подробнее", "#eng_id_#{@engine.id}", rel: "facebox" %>
-	<div id="eng_id_<%= @engine.id %>" style="display:none;"><%= split_rn(@engine.info) %></div>
+	<div id="eng_id_<%= @engine.id %>" style="display:none;">
+		<p><%= "#{@engine.model} (#{@engine.type_of_engine.name})" %></p>
+		<%= split_rn(@engine.info) %>
+	</div>
 </li>
 <li style=<%= raw "\"background-color:#{cookies[:color]};\"" %>>
 	Выбранный цвет: <%= cookies[:color_name] %>

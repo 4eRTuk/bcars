@@ -31,8 +31,8 @@ def correct_user
 	end
 end
 
-def user_acs_level
-    if current_user.acs_level == 0
+def user_acs_level(level)
+    if current_user.acs_level < level
 		flash[:notice] = "У вас нет доступа к этой странице!"
 		redirect_to(root_url)
 	end

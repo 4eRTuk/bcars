@@ -1,8 +1,8 @@
 ﻿<h2>Самые продаваемые</h2>
 <ul>
-<% OCI8.new('s160645', 'nwr508', 'test').exec('select * from TOP_CARS_BY_ORDERS where ROWNUM <= 10') do |r| %>
-	<li>
-		<%= link_to "#{r[2]} (#{number_to_human r[0], precision: 0})", model_path(r[1]), class:'c-link' %>
-	</li>
-<% end %>
+	<% TopCars.limit(10).each do |model| %>
+		<li>
+			<%= link_to "#{Model.find(model.model_id).manufacturer.name} #{Model.find(model.model_id).name} (#{number_to_human model.count, precision: 0})", model_path(model.model_id), class:'c-link' %>
+		</li>
+	<% end %>
 </ul>

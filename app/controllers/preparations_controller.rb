@@ -2,7 +2,12 @@ class PreparationsController < ApplicationController
 before_action :preps, only: [:edit, :update]
 before_action :tps, only: [:edit, :update, :new, :create]
 before_action :signed_in_user, only: [:edit, :update, :index, :new, :create]
-before_action :user_acs_level,   only: [:edit, :update, :index, :new, :create]
+before_action only: [:edit, :index, :new] do
+	user_acs_level 1
+end
+before_action only: [:update, :create] do
+	user_acs_level 99
+end
 
 def index
 @preps = Preparation.all
@@ -29,7 +34,7 @@ def create
 	
 	if @prep.save
 		flash[:success] = "Новая услуга успешно создана"
-		redirect_to edit_preparation_path(@prep.id+1)
+		redirect_to edit_preparation_path(@prep.id)
 	else
 		render 'new'
 	end

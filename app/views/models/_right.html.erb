@@ -1,4 +1,5 @@
-﻿<table border="0" class="total">
+﻿<% if !@spec.nil? %>
+<table border="0" class="total">
 <tr class="summary"><td colspan="2"><%= @spec.name %></td></tr>
 <tr><td id="engine-sum" colspan="2">No info</td></tr>
 <tr class="summary"><td>Сумма</td>
@@ -18,3 +19,6 @@
 <td id="total-sum" class="right"><%= @spec.price %></td></tr>
 </table>
 <%= link_to "Оформить заказ", new_car_path, class:"c-link red-btn", id:"make-order" %>
+<% else %>
+<h3>Отсутствуют комплектации для модели</h3>
+<% end %>

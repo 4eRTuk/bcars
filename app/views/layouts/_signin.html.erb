@@ -1,10 +1,10 @@
 <%= form_for(:session, url: sessions_path) do |f| %>
-
-	<%= f.label :email, "Адрес email:" %>
-	<%= f.text_field :email %><br>
-	
+<div class="colors">
+	<%= f.label :email, "Email:" %>
+	<%= f.text_field :email %><br></div>
+<div class="colors">	
 	<%= f.label :password, "Пароль:" %>
-	<%= f.password_field :password %>
+	<%= f.password_field :password %></div>
 	
 	<%= f.submit "Войти", class:"c-link red-btn" %>
 <% end %>

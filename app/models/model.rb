@@ -1,6 +1,6 @@
 class Model < ActiveRecord::Base
-	self.table_name = "MODELS"
-	self.sequence_name = "MODELS_ID_SEQ"
+	#self.table_name = "MODELS"
+	#self.sequence_name = "MODELS_ID_SEQ"
 	belongs_to :manufacturer
 	has_many :cars
 	has_many :specifications

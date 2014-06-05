@@ -4,7 +4,12 @@ include ApplicationHelper
 before_action :statuses, only: [:show, :index]
 before_action :ord, only: [:show, :update, :addopt, :addprep, :remopt, :remprep]
 before_action :signed_in_user, only: [:index, :show, :update, :addopt, :addprep, :remopt, :remprep]
-before_action :user_acs_level,   only: [:index, :show, :update, :addopt, :addprep, :remopt, :remprep]
+before_action only: [:index, :show] do
+	user_acs_level 1
+end
+before_action only: [:update, :addopt, :addprep, :remopt, :remprep] do
+	user_acs_level 99
+end
 
 def index
 @orders = Order.search(params[:status_id], params[:q]).order(sort_column + " " + sort_direction).paginate(page: params[:page], per_page: 10)

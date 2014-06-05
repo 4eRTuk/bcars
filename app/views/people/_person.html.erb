@@ -1,6 +1,6 @@
-<h3>Текущие данные профиля</h3>
+<h3>Данные профиля</h3>
 <div class="right">
-<%= link_to "Изменить данные", edit_person_path(current_user), class: "m-link" %><br>
+<%= link_to "Изменить данные", edit_person_path(params[:id]), class: "m-link" %><br>
 <%= link_to "Выйти", signout_path, method: "delete", class: "m-link" %><br><br>
 <%= @person.email %><%= raw "<br>#{@person.phone}" unless @person.phone.blank? %><br><br>
 <%= raw "#{@person.lastname}<br>#{@person.firstname}<br>#{@person.middlename}" %><br><br>

@@ -3,7 +3,9 @@ Bcars::Application.routes.draw do
   resources :people, except: [:destroy]
   resources :orders, only: [:index, :show, :update]
   
-  resources :models, except: [:destroy]
+  resources :models, except: [:destroy] do
+	get "serve", :on => :member
+  end
   resources :specifications, except: [:destroy, :show, :index]
   resources :options, except: [:destroy, :show, :index]
   resources :preparations, except: [:destroy, :show]
@@ -17,6 +19,7 @@ Bcars::Application.routes.draw do
   post 'addprep' => 'orders#addprep'
   post 'removeopt' => 'orders#remopt'
   post 'removeprep' => 'orders#remprep'
+  post 'uploadphoto' => 'models#upload'
   get 'info' => 'static_pages#info'
   get 'contact' => 'static_pages#contact'
   match '/signin',  to: 'sessions#new',         via: 'get'

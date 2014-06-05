@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140519150548) do
+ActiveRecord::Schema.define(version: 20140528163430) do
 
   create_table "cars", force: true do |t|
     t.integer  "model_id",         limit: 10, precision: 10, scale: 0, null: false
@@ -59,6 +59,10 @@ ActiveRecord::Schema.define(version: 20140519150548) do
   create_table "models", force: true do |t|
     t.string  "name",            limit: 20,                          null: false
     t.integer "manufacturer_id", limit: 10, precision: 10, scale: 0, null: false
+    t.string  "iname"
+    t.binary  "data"
+    t.string  "filename"
+    t.string  "mime_type"
   end
 
   create_table "options", force: true do |t|

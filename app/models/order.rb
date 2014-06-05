@@ -1,9 +1,9 @@
 class Order < ActiveRecord::Base
-	self.table_name = "ORDERS"
-	self.sequence_name = "ORDERS_ID_SEQ"
+	#self.table_name = "ORDERS"
+	#self.sequence_name = "ORDERS_ID_SEQ"
 	#self.primary_key = "ID"
-	has_and_belongs_to_many :preparations, :join_table => "PREPARATION_ORDERS"
-	has_and_belongs_to_many :options, :join_table => "OPTIONS_ORDERS"
+	has_and_belongs_to_many :preparations, :join_table => "preparation_orders"
+	has_and_belongs_to_many :options, :join_table => "options_orders"
 	belongs_to :person, :foreign_key => "client_id"
 	belongs_to :car
 	belongs_to :status

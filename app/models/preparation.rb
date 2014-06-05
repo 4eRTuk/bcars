@@ -1,8 +1,8 @@
 class Preparation < ActiveRecord::Base
-	self.table_name = "PREPARATION"
-	self.sequence_name = "PREPARATION_ID_SEQ"
+	self.table_name = "preparation"
+	#self.sequence_name = "PREPARATION_ID_SEQ"
 	#self.primary_key = "ID"
-	has_and_belongs_to_many :orders, :join_table => "PREPARATION_ORDERS"
+	has_and_belongs_to_many :orders, :join_table => "preparation_orders"
 	belongs_to :type_of_preparation, :foreign_key => "type_id"
 	validates :name, presence: true, length: { maximum: 40 }
 	validates :type_id, presence: true

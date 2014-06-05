@@ -10,8 +10,10 @@
 	<table border="0" class="total">
 	<tr>
 	<td>
+		<% if current_user.acs_level != 1 %>
 		<%= f.label :email, "Адрес email" %>
 		<%= f.text_field :email %>
+		<% end %>
 	</td>
 	<td>
 		<%= f.label :firstname, "Имя" %>
@@ -25,8 +27,10 @@
 
 	<tr>
 	<td>
+		<% if current_user.acs_level != 1 %>
 		<%= f.label :password, "Пароль" %>
 		<%= f.password_field :password %>
+		<% end %>
 	</td>
 	<td>
 		<%= f.label :lastname, "Фамилия" %>
@@ -40,8 +44,10 @@
 
 	<tr>
 	<td>
+		<% if current_user.acs_level != 1 %>
 		<%= f.label :password_confirmation, "Подтверждение пароля" %>
 		<%= f.password_field :password_confirmation %>
+		<% end %>
 	</td>
 	<td>
 		<%= f.label :middlename, "Отчество" %>
@@ -49,7 +55,7 @@
 	</td>
 	<td>
 		<%= f.label :phone, "Телефон" %><br>
-		<%= f.text_field :phone, maxlength: 11 %>
+		<%= f.text_field :phone, maxlength: 11, size: 20 %>
 	</td>
 	</tr>	
 	</table>

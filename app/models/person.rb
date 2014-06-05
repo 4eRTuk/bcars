@@ -1,7 +1,7 @@
 class Person < ActiveRecord::Base
-	self.table_name = "PERSON"
-	self.sequence_name = "PERSON_ID_SEQ"
-	set_date_columns :dob
+	self.table_name = "person"
+	#self.sequence_name = "PERSON_ID_SEQ"
+	#set_date_columns :dob
 	
 	has_many :orders, :foreign_key => "client_id"
 
