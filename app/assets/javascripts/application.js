@@ -15,17 +15,17 @@
 //= require jquery.cookie
 //= require jquery.facebox
 //= require bootstrap-colorpicker
-//= require facebox
+//= require_tree .
 
-	function formatCurrency(val) {
-		var tail = [];
-		tail.push(' RUB');
-		tmp = val;
-		a = 10;
-		c = 0;
+function formatCurrency(val) {
+	var tail = [];
+	tail.push(' RUB');
+	tmp = val;
+	a = 10;
+	c = 0;
 		
-		if (tmp <= 0)
-			tail.push('0');			
+	if (tmp <= 0)
+		tail.push('0');			
 		
 		while (tmp > 0)
 		{
